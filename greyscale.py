@@ -1,9 +1,10 @@
 # import opencv
 import cv2
 key = None
-image = cv2.imread('lion.jpg')
+
 while(key !=27):  
     # Load the input image
+    image = cv2.imread('lion.jpg')
     cv2.imshow('Original', image)
     cv2.waitKey(0)
     
