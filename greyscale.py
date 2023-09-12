@@ -2,7 +2,7 @@
 import cv2
 key = None
 
-while(key !=27):  
+while(key != 27):  
     # Load the input image
     image = cv2.imread('lion.jpg')
     cv2.imshow('Original', image)
@@ -15,4 +15,4 @@ while(key !=27):
     key = cv2.waitKey(1)  
   
 # Window shown waits for any key pressing event
-cv2.destroyAllWindows()
+#cv2.destroyAllWindows()
