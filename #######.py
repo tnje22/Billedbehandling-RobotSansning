@@ -15,6 +15,5 @@ while (cv2.waitKey() !=27):
     image3 = cv2.imread('fail.png')
     cv2.imshow('Vindows ', image3)
     cv2.moveWindow("Vindows", 80,20)
-    cv2.waitKey(0)  
 # Window shown waits for any key pressing event
 cv2.destroyAllWindows()
