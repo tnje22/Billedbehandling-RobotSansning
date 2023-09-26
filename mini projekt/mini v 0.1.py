@@ -7,8 +7,6 @@ cv2.imshow("original", img)
 squares = []
 average_colors = []
 
-#forest_BGR = [20:40,60:68,44:62]
-
 # Define the size of each square
 square_size = 100
 

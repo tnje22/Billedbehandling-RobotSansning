@@ -2,12 +2,12 @@ import cv2
 import numpy as np
 
 # Load the image
-image = cv2.imread('king_domino_board.png')
+image = cv2.imread('mini projekt/1.jpg')
 
 # Your database of tile images (each image corresponds to a tile type)
 tile_images = {
-    'grass': cv2.imread('grass_tile.png'),
-    'water': cv2.imread('water_tile.png'),
+    'grass': cv2.imread('mini projekt/grass.png', cv2.IMREAD_GRAYSCALE),
+    'water': cv2.imread('mini projekt/Water.png', cv2.IMREAD_GRAYSCALE),
     # Add more tile types as needed
 }
 
@@ -26,16 +26,30 @@ def match_tile(tile):
     
     return best_match
 
-# Your tile detection code (similar to the previous example)
-# ...
+# Convert the image to grayscale
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-# Loop through the detected tiles
-for tile in detected_tiles:
-    # Match the tile to the closest tile in the database
+# Apply Canny edge detection
+edges = cv2.Canny(gray, threshold1=50, threshold2=150)
+
+# Find contours
+contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+# Filter out small contours (noise) based on area
+min_contour_area = 1000
+valid_contours = [cnt for cnt in contours if cv2.contourArea(cnt) > min_contour_area]
+
+# Loop through the valid contours (tiles)
+for contour in valid_contours:
+    # Extract the tile region from the image
+    x, y, w, h = cv2.boundingRect(contour)
+    tile = gray[y:y+h, x:x+w]
+    
+    # Match the tile to a known tile type
     tile_type = match_tile(tile)
     
-    # Calculate points based on the tile type and placement
-    points = calculate_points(tile_type, tile_position)
+    # Calculate points based on the tile type and placement (simplified example)
+    points = calculate_points(tile_type, (x, y))  # You need to implement this function
     
     # Display the tile type and points on the image
     cv2.putText(image, f'Tile: {tile_type}', (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
