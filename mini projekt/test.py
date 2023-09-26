@@ -1,28 +1,27 @@
-# Display cropped image
 import cv2
+import numpy as np
 
-cv2.imshow("square1", square1)
-cv2.imshow("square2", square2)
-cv2.imshow("square3", square3)
-cv2.imshow("square4", square4)
-cv2.imshow("square5", square5)
-cv2.imshow("square6", square6)
-cv2.imshow("square7", square7)
-cv2.imshow("square8", square8)
-cv2.imshow("square9", square9)
-cv2.imshow("square10", square10)
-cv2.imshow("square11", square11)
-cv2.imshow("square12", square12)
-cv2.imshow("square13", square13)
-cv2.imshow("square14", square14)
-cv2.imshow("square15", square15)
-cv2.imshow("square16", square16)
-cv2.imshow("square17", square17)
-cv2.imshow("square18", square18)
-cv2.imshow("square19", square19)
-cv2.imshow("square20", square20)
-cv2.imshow("square21", square21)
-cv2.imshow("square22", square22)
-cv2.imshow("square23", square23)
-cv2.imshow("square24", square24)
-cv2.imshow("square25", square25)
+img = cv2.imread('mini projekt/1.jpg')
+cv2.imshow("original", img)
+
+squares = []
+average_colors = []
+
+# Define the size of each square
+square_size = 100
+
+# Iterate over rows and columns to crop and calculate average color
+for y in range(5):
+    for x in range(5):
+        square = img[y * square_size:(y + 1) * square_size, x * square_size:(x + 1) * square_size]
+        squares.append(square)
+        average_color = np.average(square, axis=(0, 1))
+        average_colors.append(average_color)
+
+# Display the cropped squares and their average colors
+for i, (square, average_color) in enumerate(zip(squares, average_colors), 1):
+    cv2.imshow(f"Square {i}", square)
+    print(f"Average Color for Square {i}: {average_color}")
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
