@@ -20,8 +20,9 @@ for y in range(5):
 
 # Display the cropped squares and their average colors
 for i, (square, average_color) in enumerate(zip(squares, average_colors), 1):
-    cv2.imshow(f"Square {i}", square)
+    #cv2.imshow(f"Square {i}", square)
     print(f"Average Color for Square {i}: {average_color}")
 
+print(average_colors[4])
 cv2.waitKey(0)
 cv2.destroyAllWindows()
