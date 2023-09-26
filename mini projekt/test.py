@@ -13,7 +13,7 @@ cropped_image = img[100:200, 0:100]
 cv2.imshow("cropped", cropped_image)
  
 # Save the cropped image
-cv2.imwrite("Cropped Image.jpg", cropped_image)
+#cv2.imwrite("Cropped Image.jpg", cropped_image)
  
 cv2.waitKey(0)
 cv2.destroyAllWindows()
