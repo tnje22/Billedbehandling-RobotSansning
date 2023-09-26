@@ -2,26 +2,22 @@ import cv2
 import numpy as np
 
 img = cv2.imread('mini projekt/1.jpg')
-cv2.imshow("original", img)
-
-squares = []
-average_colors = []
 
 # Define the size of each square
 square_size = 100
 
-# Iterate over rows and columns to crop and calculate average color
+# Initialize a list to store histograms
+histograms = []
+
+# Iterate over rows and columns to crop and calculate histograms
 for y in range(5):
     for x in range(5):
         square = img[y * square_size:(y + 1) * square_size, x * square_size:(x + 1) * square_size]
-        squares.append(square)
-        average_color = np.average(square, axis=(0, 1))
-        average_colors.append(average_color)
+        hist = cv2.calcHist([square], [0, 1, 2], None, [8, 8, 8], [0, 256, 0, 256, 0, 256])
+        histograms.append(hist)
 
-# Display the cropped squares and their average colors
-for i, (square, average_color) in enumerate(zip(squares, average_colors), 1):
-    cv2.imshow(f"Square {i}", square)
-    print(f"Average Color for Square {i}: {average_color}")
-
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# Perform histogram comparison pairwise
+for i in range(len(histograms)):
+    for j in range(i + 1, len(histograms)):
+        intersection = cv2.compareHist(histograms[i], histograms[j], cv2.HISTCMP_INTERSECT)
+        print(f'Histogram Intersection between Square {i + 1} and Square {j + 1}: {intersection}')
