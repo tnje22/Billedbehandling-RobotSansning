@@ -6,5 +6,7 @@ import numpy as np
 image = cv2.imread('mini projekt/1.jpg')
 cv2.imshow('Plade', image)
 
+print(image[0][0])
+
 # Window shown waits for any key pressing event
 cv2.waitKey(0) 
