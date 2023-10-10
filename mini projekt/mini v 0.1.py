@@ -22,7 +22,7 @@ for y in range(5):
 for i, (square, average_color) in enumerate(zip(squares, average_colors), 1):
     #cv2.imshow(f"Square {i}", square)
     print(f"Average Color for Square {i}: {average_color}")
-
-print(average_colors[4])
+#average_colors er en liste og de starter fra 0 så nummer 4 i listen er square 5
+#print(average_colors[4])
 cv2.waitKey(0)
 cv2.destroyAllWindows()
