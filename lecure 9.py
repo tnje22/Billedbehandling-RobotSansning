@@ -1,7 +1,7 @@
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
-Data1 = np.loadtxt("trainClass1.dat",converters=arry)
+Data1 = np.loadtxt("trainClass1.dat")
 print(Data1)
 
 
